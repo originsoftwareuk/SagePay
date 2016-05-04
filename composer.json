@@ -32,10 +32,10 @@
     },
     "autoload": {
         "psr-0": {
-            "OriginSoftware\\SagePay": "src/"
+            "Academe\\SagePay": "src/"
         },
         "psr-4": {
-            "OriginSoftware\\SagePay\\": "src/OriginSoftware/SagePay/"
+            "Academe\\SagePay\\": "src/OriginSoftware/SagePay/"
         }
     }
 }
