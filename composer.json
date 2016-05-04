@@ -1,5 +1,5 @@
 {
-    "name": "academe/sagepay",
+    "name": "originsoftwareuk/sagepay",
     "license": "MIT",
     "type": "library",
     "description": "A library to handle the back-end processing for the SagePay Server (protocol v3) service",
@@ -9,17 +9,17 @@
         "payment",
         "sagepay"
     ],
-    "homepage": "https://github.com/academe/SagePay",
+    "homepage": "https://github.com/originsoftwareuk/SagePay",
     "authors": [
         {
-            "name": "Jason Judge",
-            "email": "jason.judge@academe.co.uk",
-            "homepage": "http://www.academe.co.uk/",
+            "name": "Origin Software",
+            "email": "support@originsoftware.co.uk",
+            "homepage": "http://www.originsoftware.co.uk/",
             "role": "Developer"
         },
         {
             "name": "Other Contributors",
-            "homepage": "https://github.com/academe/SagePay/graphs/contributors",
+            "homepage": "https://github.com/originsoftwareuk/SagePay/graphs/contributors",
             "role": "Developer"
         }
     ],
@@ -32,10 +32,10 @@
     },
     "autoload": {
         "psr-0": {
-            "Academe\\SagePay": "src/"
+            "OriginSoftware\\SagePay": "src/"
         },
         "psr-4": {
-            "Academe\\SagePay\\": "src/Academe/SagePay/"
+            "OriginSoftware\\SagePay\\": "src/OriginSoftware/SagePay/"
         }
     }
 }
