@@ -427,6 +427,7 @@ class Server extends Shared
             $statusOk = true;
             $this->setField('VPSTxId', $output['VPSTxId']);
             $this->setField('SecurityKey', $output['SecurityKey']);
+            $this->setField('TxAuthNo', $output['TxAuthNo']);
 
             // Move the status as PENDING, to indicate we are waitng for a response from SagePay.
             // Note: SagePay has now introduced a PENDING status in connection with PayPal and
@@ -481,6 +482,7 @@ class Server extends Shared
             $statusOk = true;
             $this->setField('VPSTxId', $output['VPSTxId']);
             $this->setField('SecurityKey', $output['SecurityKey']);
+            $this->setField('TxAuthNo', $output['TxAuthNo']);
 
             // Move the status as PENDING, to indicate we are waitng for a response from SagePay.
             // Note: SagePay has now introduced a PENDING status in connection with PayPal and
