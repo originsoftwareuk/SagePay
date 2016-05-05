@@ -134,6 +134,7 @@ class Transaction
                     "shared-abort",
                     "shared-void",
                     "shared-cancel",
+                    "shared-authorise",
                     "server-standalone-token",
                     "direct-standalone-token"
                 ],
@@ -157,6 +158,45 @@ class Transaction
                 "store": true,
                 "notes": "Points to an original transaction"
             },
+            "RelatedVPSTxId": {
+                "required": true,
+                "type": "string",
+                "min": 1,
+                "max": 38,
+                "chars": ["A", "a", "9", "{", "-"],
+                "source": [
+                    "shared-authorise"
+                ],
+                "tamper": true,
+                "store": true,
+                "notes": "The VPSTxId of the AUTHENTICATE transaction which requires authorising"
+            },
+            "RelatedSecurityKey": {
+                "required": true,
+                "type": "string",
+                "min": 1,
+                "max": 10,
+                "chars": ["A", "a", "9"],
+                "source": [
+                    "shared-authorise"
+                ],
+                "tamper": true,
+                "store": true,
+                "notes": "The SecurityKey of the AUTHENTICATE transaction which requires authorising"
+            },
+            "RelatedTxAuthNo": {
+                "required": true,
+                "type": "string",
+                "min": 1,
+                "max": 10,
+                "chars": ["9"],
+                "source": [
+                    "shared-authorise"
+                ],
+                "tamper": true,
+                "store": true,
+                "notes": "The TxAuthNo of the AUTHENTICATE transaction which requires authorising"
+            },
             "VPSProtocol": {
                 "required": true,
                 "type": "string",
@@ -177,6 +217,7 @@ class Transaction
                     "shared-void-response",
                     "shared-cancel",
                     "shared-cancel-response",
+                    "shared-authorise",
                     "server-standalone-token",
                     "direct-standalone-token"
                 ],
@@ -214,6 +255,7 @@ class Transaction
                     "shared-abort",
                     "shared-void",
                     "shared-cancel",
+                    "shared-authorise",
                     "server-standalone-token",
                     "direct-standalone-token"
                 ],
@@ -232,6 +274,7 @@ class Transaction
                     "shared-abort",
                     "shared-void",
                     "shared-cancel",
+                    "shared-authorise",
                     "server-standalone-token",
                     "direct-standalone-token"
                 ],
@@ -247,6 +290,7 @@ class Transaction
                 "source": [
                     "server-registration",
                     "direct-registration",
+                    "shared-authorise",
                     "paypal-complete"
                 ],
                 "default": "0",
@@ -286,6 +330,7 @@ class Transaction
                 "type": "html",
                 "source": [
                     "server-registration",
+                    "shared-authorise",
                     "direct-registration"
                 ],
                 "store": true
@@ -572,6 +617,7 @@ class Transaction
                 "min": 1,
                 "max": 1,
                 "source": [
+                    "shared-authorise",
                     "server-registration"
                 ],
                 "store": true

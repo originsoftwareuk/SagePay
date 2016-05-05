@@ -395,9 +395,11 @@ class Server extends Shared
     {
         $method = 'server';
         $this->setTxType('AUTHORISE');
+        $this->save();
 
         $sagepay_url = $this->getUrl($method, $this->sagepay_platform, $this->getField('TxType'));
         echo "Sage Pay URL: $sagepay_url<br>";
-        $this->queryData(true, 'shared-authorise');
+        $query_string = $this->queryData(true, 'shared-authorise');
+        echo "Query string: $query_string<br>";
     }
 }

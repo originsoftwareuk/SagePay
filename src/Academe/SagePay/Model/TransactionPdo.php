@@ -312,6 +312,10 @@ class TransactionPdo extends TransactionAbstract
         $up_migrations[] = "ALTER TABLE $transaction_table ADD COLUMN RelatedSecurityKey"
             . " varchar(10) DEFAULT NULL";
 
+        // Add RelatedTxAuthNo column.
+        $up_migrations[] = "ALTER TABLE $transaction_table ADD COLUMN RelatedTxAuthNo"
+            . " varchar(10) DEFAULT NULL";
+
         // Pull Request #36 add ExpiryDate column.
         $up_migrations[] = "ALTER TABLE $transaction_table ADD COLUMN ExpiryDate"
             . " varchar(4) DEFAULT NULL AFTER `PayerStatus`";
