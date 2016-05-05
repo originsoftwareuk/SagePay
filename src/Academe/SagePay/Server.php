@@ -414,20 +414,17 @@ class Server extends Shared
 
     public function sendAuthorisation()
     {
+        $statusOk = false;
         $method = 'server';
         $this->setTxType('AUTHORISE');
         $this->save();
 
         $sagepay_url = $this->getUrl($method, $this->sagepay_platform, $this->getField('TxType'));
-        echo "Sage Pay URL: $sagepay_url<br>";
         $query_string = $this->queryData(true, 'shared-authorise');
-        echo "Query string: $query_string<br>";
         $output = $this->postSagePay($sagepay_url, $query_string, $this->timeout);
-        echo "<pre>";
-        print_r($output);
-        echo "</pre>";
 
         if (isset($output['Status']) && $output['Status'] == 'OK') {
+            $statusOk = true;
             $this->setField('VPSTxId', $output['VPSTxId']);
             $this->setField('SecurityKey', $output['SecurityKey']);
 
@@ -461,5 +458,60 @@ class Server extends Shared
                 $this->save();
             }
         }
+        return $statusOk;
+    }
+
+    public function sendRefund()
+    {
+        $statusOk = false;
+        $method = 'server';
+        $this->setTxType('REFUND');
+        $this->save();
+
+        $sagepay_url = $this->getUrl($method, $this->sagepay_platform, $this->getField('TxType'));
+        $query_string = $this->queryData(true, 'shared-refund');
+        echo "URL: $sagepay_url<br>Query: $query_string<br>";
+
+        $output = $this->postSagePay($sagepay_url, $query_string, $this->timeout);
+        echo "<pre>";
+        print_r($output);
+        echo "</pre>";
+
+        if (isset($output['Status']) && $output['Status'] == 'OK') {
+            $statusOk = true;
+            $this->setField('VPSTxId', $output['VPSTxId']);
+            $this->setField('SecurityKey', $output['SecurityKey']);
+
+            // Move the status as PENDING, to indicate we are waitng for a response from SagePay.
+            // Note: SagePay has now introduced a PENDING status in connection with PayPal and
+            // European payments. To support that, we can no longer use PENDING for our own
+            // purposes.
+            $this->setField('Status', $output['Status']);
+
+            $this->setField('StatusDetail', $output['StatusDetail']);
+
+            // Set the NextURL in the model. It won't get saved, but will be accessible to
+            // the calling function to action.
+            $this->setField('NextURL', $output['NextURL']);
+
+            // Save the transaction to storage.
+            // TODO: catch save failures.
+            $this->save();
+        } else {
+            // SagePay has rejected what we have sent.
+            $this->setField('Status', $output['Status']);
+            $this->setField('StatusDetail', $output['StatusDetail']);
+
+            // If the option is set, save the failed registration to the transaction to storage.
+            // The failures are logged by SagePay anyway, and you probably don't want to clog up
+            // storage with the failures, unless you have a specific reason to monitor this.
+            // With the Issue #10 fix this is moot now, as the transaction is saved before
+            // posting to SagePay regardless of the result. I'll probably remove this option and
+            // just leave the cleaning out of failed transactions as an administratitive job.
+            if ($this->save_failed_registrations) {
+                $this->save();
+            }
+        }
+        return $statusOk;
     }
 }

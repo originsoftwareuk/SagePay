@@ -153,6 +153,7 @@ class Transaction
                     "shared-abort",
                     "shared-void",
                     "shared-cancel",
+                    "shared-refund",
                     "shared-authorise"
                 ],
                 "tamper": false,
@@ -166,6 +167,7 @@ class Transaction
                 "max": 38,
                 "chars": ["A", "a", "9", "{", "-"],
                 "source": [
+                    "shared-refund",
                     "shared-authorise"
                 ],
                 "tamper": true,
@@ -179,6 +181,7 @@ class Transaction
                 "max": 10,
                 "chars": ["A", "a", "9"],
                 "source": [
+                    "shared-refund",
                     "shared-authorise"
                 ],
                 "tamper": true,
@@ -192,6 +195,7 @@ class Transaction
                 "max": 10,
                 "chars": ["9"],
                 "source": [
+                    "shared-refund",
                     "shared-authorise"
                 ],
                 "tamper": true,
@@ -219,6 +223,7 @@ class Transaction
                     "shared-cancel",
                     "shared-cancel-response",
                     "shared-authorise",
+                    "shared-refund",
                     "server-standalone-token",
                     "direct-standalone-token"
                 ],
@@ -257,6 +262,7 @@ class Transaction
                     "shared-void",
                     "shared-cancel",
                     "shared-authorise",
+                    "shared-refund",
                     "server-standalone-token",
                     "direct-standalone-token"
                 ],
@@ -276,6 +282,7 @@ class Transaction
                     "shared-void",
                     "shared-cancel",
                     "shared-authorise",
+                    "shared-refund",
                     "server-standalone-token",
                     "direct-standalone-token"
                 ],
@@ -292,6 +299,7 @@ class Transaction
                     "server-registration",
                     "direct-registration",
                     "shared-authorise",
+                    "shared-refund",
                     "paypal-complete"
                 ],
                 "default": "0",
@@ -318,6 +326,7 @@ class Transaction
                 "source": [
                     "server-registration",
                     "direct-registration",
+                    "shared-refund",
                     "server-standalone-token",
                     "direct-standalone-token"
                 ],
@@ -332,6 +341,7 @@ class Transaction
                 "source": [
                     "server-registration",
                     "shared-authorise",
+                    "shared-refund",
                     "direct-registration"
                 ],
                 "store": true
