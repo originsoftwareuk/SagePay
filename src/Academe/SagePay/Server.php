@@ -370,4 +370,34 @@ class Server extends Shared
         return $this;
     }
 
+    public function setDescription($description)
+    {
+        $this->setField('Description', $description);
+
+        return $this;
+    }
+
+    public function setNotificationURL($url)
+    {
+        $this->setField('NotificationURL', $url);
+
+        return $this;
+    }
+
+    public function setRelatedVendorTxCode($code)
+    {
+        $this->setField('RelatedVendorTxCode', $code);
+
+        return $this;
+    }
+
+    public function sendAuthorisation()
+    {
+        $method = 'server';
+        $this->setTxType('AUTHORISE');
+
+        $sagepay_url = $this->getUrl($method, $this->sagepay_platform, $this->getField('TxType'));
+        echo "Sage Pay URL: $sagepay_url<br>";
+        $this->queryData(true, 'shared-authorise');
+    }
 }
