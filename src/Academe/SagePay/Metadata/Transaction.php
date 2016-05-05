@@ -130,7 +130,7 @@ class Transaction
                     "server-registration",
                     "direct-registration",
                     "shared-release",
-                    "shared-release",
+                    "shared-refund",
                     "shared-abort",
                     "shared-void",
                     "shared-cancel",
