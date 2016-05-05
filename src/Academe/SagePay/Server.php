@@ -391,6 +391,27 @@ class Server extends Shared
         return $this;
     }
 
+    public function setRelatedVPSTxId($code)
+    {
+        $this->setField('RelatedVPSTxId', $code);
+
+        return $this;
+    }
+
+    public function setRelatedSecurityKey($code)
+    {
+        $this->setField('RelatedSecurityKey', $code);
+
+        return $this;
+    }
+
+    public function setRelatedTxAuthNo($code)
+    {
+        $this->setField('RelatedTxAuthNo', $code);
+
+        return $this;
+    }
+
     public function sendAuthorisation()
     {
         $method = 'server';
@@ -401,5 +422,9 @@ class Server extends Shared
         echo "Sage Pay URL: $sagepay_url<br>";
         $query_string = $this->queryData(true, 'shared-authorise');
         echo "Query string: $query_string<br>";
+        $output = $this->postSagePay($sagepay_url, $query_string, $this->timeout);
+        echo "<pre>";
+        print_r($output);
+        echo "</pre>";
     }
 }

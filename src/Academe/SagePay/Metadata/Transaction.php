@@ -152,7 +152,8 @@ class Transaction
                     "shared-release",
                     "shared-abort",
                     "shared-void",
-                    "shared-cancel"
+                    "shared-cancel",
+                    "shared-authorise"
                 ],
                 "tamper": false,
                 "store": true,
