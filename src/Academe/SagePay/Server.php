@@ -474,6 +474,7 @@ class Server extends Shared
 
         $output = $this->postSagePay($sagepay_url, $query_string, $this->timeout);
         echo "<pre>";
+        print_r($this);
         print_r($output);
         echo "</pre>";
 
