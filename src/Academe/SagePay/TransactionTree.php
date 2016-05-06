@@ -81,6 +81,7 @@ class TransactionTree
 
     public function buildTree()
     {
+        $this->tree = array();
         $pdo = $this->getConnection();
         $stmt = $pdo->prepare('SELECT * FROM sagepay_transactions WHERE CustomData = :paymentId');
         $stmt->bindParam('paymentId', $this->paymentId, \PDO::PARAM_STR);
