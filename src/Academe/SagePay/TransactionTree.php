@@ -101,7 +101,6 @@ class TransactionTree
                 $this->tree[$authorisation['RelatedVendorTxCode']]['authorisations'][$authorisation['VendorTxCode']] = array('authorisation' => $authorisation, 'refunds' => array(), 'total' => 0);
                 $this->tree[$authorisation['RelatedVendorTxCode']]['authorisations'][$authorisation['VendorTxCode']]['total'] += $authorisation['Amount'];
                 $this->tree[$authorisation['RelatedVendorTxCode']]['amounts']['authorisations'] += $authorisation['Amount'];
-                $this->tree[$authorisation['RelatedVendorTxCode']]['amounts']['total'] += $authorisation['Amount'];
 
                 $stmt = $pdo->prepare('SELECT * FROM sagepay_transactions spt WHERE spt.RelatedVendorTxCode = :VendorTxCode AND spt.TxType = "REFUND" AND spt.Status = "OK"');
                 $stmt->bindParam('VendorTxCode', $authorisation['VendorTxCode'], \PDO::PARAM_STR);
@@ -112,9 +111,9 @@ class TransactionTree
                     $this->tree[$authorisation['RelatedVendorTxCode']]['authorisations'][$refund['RelatedVendorTxCode']]['refunds'][$refund['VendorTxCode']] = $refund;
                     $this->tree[$authorisation['RelatedVendorTxCode']]['authorisations'][$authorisation['VendorTxCode']]['total'] -= $refund['Amount'];
                     $this->tree[$authorisation['RelatedVendorTxCode']]['amounts']['refunds'] += $refund['Amount'];
-                    $this->tree[$authorisation['RelatedVendorTxCode']]['amounts']['total'] -= $refund['Amount'];
                 }
             }
+            $this->tree[$authorisation['RelatedVendorTxCode']]['amounts']['total'] = $this->tree[$authorisation['RelatedVendorTxCode']]['amounts']['authorisations'] - $this->tree[$authorisation['RelatedVendorTxCode']]['amounts']['refunds'];
         }
         $this->hasTree = true;
     }
