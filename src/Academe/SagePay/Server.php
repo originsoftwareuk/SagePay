@@ -471,12 +471,8 @@ class Server extends Shared
 
         $sagepay_url = $this->getUrl($method, $this->sagepay_platform, $this->getField('TxType'));
         $query_string = $this->queryData(true, 'shared-refund');
-        echo "URL: $sagepay_url<br>Query: $query_string<br>";
 
         $output = $this->postSagePay($sagepay_url, $query_string, $this->timeout);
-        echo "<pre>";
-        print_r($output);
-        echo "</pre>";
 
         if (isset($output['Status']) && $output['Status'] == 'OK') {
             $statusOk = true;
